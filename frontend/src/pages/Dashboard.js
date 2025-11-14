@@ -57,6 +57,19 @@ const Dashboard = () => {
     }
   };
 
+  const handleDeleteHabit = async (habitId) => {
+    if (!window.confirm('Are you sure you want to delete this habit?')) {
+      return;
+    }
+    
+    try {
+      await habitsAPI.delete(habitId);
+      fetchDashboardData();
+    } catch (error) {
+      console.error('Error deleting habit:', error);
+    }
+  };
+
   if (loading) {
     return <div className="loading">Loading your dashboard...</div>;
   }
@@ -146,6 +159,7 @@ const Dashboard = () => {
                     key={habit._id}
                     habit={habit}
                     onComplete={handleHabitComplete}
+                    onDelete={handleDeleteHabit}
                   />
                 ))}
               </div>

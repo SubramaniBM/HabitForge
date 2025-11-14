@@ -1,8 +1,8 @@
 import React from 'react';
-import { FaCheck, FaFire, FaTrophy } from 'react-icons/fa';
+import { FaCheck, FaFire, FaTrophy, FaTrash } from 'react-icons/fa';
 import './HabitCard.css';
 
-const HabitCard = ({ habit, onComplete }) => {
+const HabitCard = ({ habit, onComplete, onDelete }) => {
   const isCompletedToday = () => {
     if (!habit.completions || habit.completions.length === 0) return false;
     
@@ -32,6 +32,14 @@ const HabitCard = ({ habit, onComplete }) => {
 
   return (
     <div className={`habit-card card ${completed ? 'completed' : ''}`}>
+      <button 
+        className="delete-habit-btn"
+        onClick={() => onDelete && onDelete(habit._id)}
+        title="Delete habit"
+      >
+        <FaTrash />
+      </button>
+      
       <div className="habit-header">
         <div className="habit-icon" style={{ backgroundColor: habit.color }}>
           {getCategoryIcon(habit.category)}

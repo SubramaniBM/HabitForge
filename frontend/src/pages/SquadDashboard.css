@@ -8,6 +8,13 @@
   gap: 24px;
   margin-bottom: 24px;
   padding: 32px;
+  position: relative;
+}
+
+.squad-header .btn {
+  position: absolute;
+  top: 32px;
+  right: 32px;
 }
 
 .squad-header-icon {

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { squadsAPI, activitiesAPI } from '../services/api';
-import { FaTrophy, FaFire, FaHeart } from 'react-icons/fa';
+import { FaTrophy, FaFire, FaHeart, FaUserPlus } from 'react-icons/fa';
+import InviteModal from '../components/InviteModal';
 import './SquadDashboard.css';
 
 const SquadDashboard = () => {
@@ -10,6 +11,7 @@ const SquadDashboard = () => {
   const [activities, setActivities] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showInviteModal, setShowInviteModal] = useState(false);
 
   useEffect(() => {
     fetchSquadData();
@@ -67,6 +69,12 @@ const SquadDashboard = () => {
               <span>{squad.category}</span>
             </div>
           </div>
+          <button 
+            className="btn btn-primary"
+            onClick={() => setShowInviteModal(true)}
+          >
+            <FaUserPlus /> Invite Members
+          </button>
         </div>
 
         <div className="squad-goal-card card">
@@ -156,6 +164,14 @@ const SquadDashboard = () => {
           </div>
         </div>
       </div>
+
+      {showInviteModal && (
+        <InviteModal
+          squadId={id}
+          squadName={squad.name}
+          onClose={() => setShowInviteModal(false)}
+        />
+      )}
     </div>
   );
 };

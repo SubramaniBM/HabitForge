@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { squadsAPI } from '../services/api';
 import { FaSearch, FaUsers, FaPlus, FaLock, FaGlobe } from 'react-icons/fa';
+import CreateSquadModal from '../components/CreateSquadModal';
 import './SquadDiscovery.css';
 
 const SquadDiscovery = () => {
@@ -58,6 +59,16 @@ const SquadDiscovery = () => {
       fetchPublicSquads();
     } catch (error) {
       console.error('Error joining squad:', error);
+    }
+  };
+
+  const handleCreateSquad = async (squadData) => {
+    try {
+      await squadsAPI.create(squadData);
+      setShowCreateModal(false);
+      fetchPublicSquads();
+    } catch (error) {
+      console.error('Error creating squad:', error);
     }
   };
 
@@ -162,6 +173,13 @@ const SquadDiscovery = () => {
           </div>
         )}
       </div>
+
+      {showCreateModal && (
+        <CreateSquadModal
+          onClose={() => setShowCreateModal(false)}
+          onCreate={handleCreateSquad}
+        />
+      )}
     </div>
   );
 };
