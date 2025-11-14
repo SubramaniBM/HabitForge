@@ -356,6 +356,10 @@ The React app will start on `http://localhost:3000`
 
 ## 👥 Contributors
 
+- **Subramani B M**
+- **Sujan S H**
+- **Skanda M L**
+
 This project was developed as part of the Web Technologies course.
 
 ---
