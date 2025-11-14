@@ -364,12 +364,6 @@ This project was developed as part of the Web Technologies course.
 
 ---
 
-## 📄 License
-
-This project is created for educational purposes.
-
----
-
 ## 🤝 Support
 
 For questions or issues:
