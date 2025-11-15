@@ -49,7 +49,8 @@ Users can track their personal habits and form small groups called **"Squads."**
 - **React Router** - Client-side routing
 - **Axios** - HTTP client
 - **React Icons** - Icon library
-- **CSS3** - Styling with custom design system
+- **CSS3** - Custom design system with modern styling
+- **Google Fonts** - Clash Grotesk & Inter typography
 
 ### Backend
 - **Node.js** - Runtime environment
@@ -287,18 +288,24 @@ The React app will start on `http://localhost:3000`
 ## 🎨 Design Features
 
 ### Color Palette
-- **Primary**: `#4A90E2` (Blue)
-- **Secondary**: `#50C878` (Green)
-- **Accent**: `#FF6B35` (Orange)
-- **Warning**: `#F39C12` (Yellow)
-- **Dark**: `#2C3E50`
+- **Primary**: `#0d0f0d` (Dark)
+- **Background**: `#f5f3e8` (Light Cream)
+- **Card Background**: `#ffffff` (White)
+- **Accent**: `#666666` (Gray)
+- **Success**: `#22c55e` (Green)
+- **Danger**: `#ef4444` (Red)
+- **Warning**: `#f59e0b` (Orange)
 
 ### Visual Elements
-- **Gradient backgrounds** for engaging UI
-- **Smooth animations** and transitions
+- **Modern minimalist design** with clean lines
+- **Rounded corners** (8px border-radius) for polished look
+- **Subtle shadows** for depth and hierarchy
+- **Smooth animations** and hover effects
 - **Responsive design** for all screen sizes
+- **Typography**: Clash Grotesk & Inter fonts
 - **Icon system** using React Icons
 - **Card-based layout** for content organization
+- **Hover interactions** with lift effects on buttons
 
 ---
 
@@ -343,14 +350,17 @@ The React app will start on `http://localhost:3000`
 
 ## 🚧 Future Enhancements
 
+- [ ] Dark mode toggle for accessibility
 - [ ] Email notifications for squad activities
 - [ ] Custom badge creation
 - [ ] Habit templates and suggestions
-- [ ] Data visualization (charts and graphs)
-- [ ] Mobile app version
+- [ ] Advanced data visualization (charts and graphs)
+- [ ] Mobile app version (React Native)
 - [ ] Social sharing features
-- [ ] Habit reminders and notifications
-- [ ] Premium features (themes, advanced stats)
+- [ ] Habit reminders and push notifications
+- [ ] Premium features (custom themes, advanced stats)
+- [ ] Calendar view for habit tracking
+- [ ] Export progress reports (PDF/CSV)
 
 ---
 
