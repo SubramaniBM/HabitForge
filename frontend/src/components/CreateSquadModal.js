@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { FaTimes, FaUsers, FaGlobe, FaLock } from 'react-icons/fa';
 import './CreateSquadModal.css';
 
@@ -28,7 +29,7 @@ const CreateSquadModal = ({ onClose, onCreate }) => {
     await onCreate(formData);
   };
 
-  return (
+  return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
@@ -141,7 +142,8 @@ const CreateSquadModal = ({ onClose, onCreate }) => {
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

@@ -1,6 +1,7 @@
 .dashboard-page {
   background-color: var(--bg-color);
   min-height: calc(100vh - 80px);
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
 .dashboard-header {

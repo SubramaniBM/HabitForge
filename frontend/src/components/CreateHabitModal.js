@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { FaTimes } from 'react-icons/fa';
 import './CreateHabitModal.css';
 
@@ -43,7 +44,7 @@ const CreateHabitModal = ({ onClose, onCreate }) => {
     onCreate(formData);
   };
 
-  return (
+  return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
@@ -121,7 +122,8 @@ const CreateHabitModal = ({ onClose, onCreate }) => {
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

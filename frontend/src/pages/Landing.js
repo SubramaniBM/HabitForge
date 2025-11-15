@@ -1,9 +1,56 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFire, FaUsers, FaTrophy, FaMedal, FaChartLine, FaArrowRight, FaStar, FaBolt, FaHeart, FaRocket, FaCrown } from 'react-icons/fa';
 import './Landing.css';
 
 const Landing = () => {
+  useEffect(() => {
+    // Simple fade-in animations using CSS classes
+    const heroTitle = document.querySelector('.hero-title');
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    const heroButtons = document.querySelectorAll('.hero-buttons .btn');
+    
+    if (heroTitle) heroTitle.style.animation = 'fadeInDown 1.2s ease-out forwards';
+    if (heroSubtitle) heroSubtitle.style.animation = 'fadeInUp 1s ease-out 0.3s forwards';
+    heroButtons.forEach((btn, i) => {
+      btn.style.animation = `fadeInUp 0.8s ease-out ${0.5 + i * 0.1}s forwards`;
+    });
+
+    // Animate on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.feature-card, .step').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+
+    const titleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'scaleIn 0.6s ease-out forwards';
+          titleObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.section-title').forEach(title => {
+      title.style.opacity = '0';
+      titleObserver.observe(title);
+    });
+
+    return () => {
+      observer.disconnect();
+      titleObserver.disconnect();
+    };
+  }, []);
+
   return (
     <div className="landing-page">
       {/* Hero Section */}
