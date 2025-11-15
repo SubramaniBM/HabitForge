@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { habitsAPI, squadsAPI } from '../services/api';
-import { FaPlus, FaFire, FaTrophy, FaUsers, FaChartLine } from 'react-icons/fa';
+import { FaPlus, FaFire, FaTrophy, FaUsers, FaChartLine, FaBullseye } from 'react-icons/fa';
 import HabitCard from '../components/HabitCard';
 import CreateHabitModal from '../components/CreateHabitModal';
+import AchievementNotification from '../components/AchievementNotification';
+import ConfirmDialog from '../components/ConfirmDialog';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -14,10 +16,23 @@ const Dashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [achievementQueue, setAchievementQueue] = useState([]);
+  const [currentAchievement, setCurrentAchievement] = useState(null);
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, habitId: null });
 
   useEffect(() => {
     fetchDashboardData();
   }, []);
+
+  useEffect(() => {
+    // Display next achievement from queue
+    console.log('Achievement queue:', achievementQueue, 'Current:', currentAchievement);
+    if (achievementQueue.length > 0 && !currentAchievement) {
+      console.log('Showing achievement:', achievementQueue[0]);
+      setCurrentAchievement(achievementQueue[0]);
+      setAchievementQueue(prev => prev.slice(1));
+    }
+  }, [achievementQueue, currentAchievement]);
 
   const fetchDashboardData = async () => {
     try {
@@ -40,8 +55,16 @@ const Dashboard = () => {
 
   const handleHabitComplete = async (habitId) => {
     try {
-      await habitsAPI.complete(habitId);
+      const response = await habitsAPI.complete(habitId);
+      console.log('Complete habit response:', response.data);
+      console.log('New badges from completion:', response.data.newBadges);
       fetchDashboardData(); // Refresh data
+      
+      // Show achievement notifications
+      if (response.data.newBadges && response.data.newBadges.length > 0) {
+        console.log('Adding completion badges to queue:', response.data.newBadges);
+        setAchievementQueue(prev => [...prev, ...response.data.newBadges]);
+      }
     } catch (error) {
       console.error('Error completing habit:', error);
     }
@@ -49,24 +72,34 @@ const Dashboard = () => {
 
   const handleCreateHabit = async (habitData) => {
     try {
-      await habitsAPI.create(habitData);
+      const response = await habitsAPI.create(habitData);
+      console.log('Create habit response:', response.data);
+      console.log('New badges received:', response.data.newBadges);
       fetchDashboardData();
       setShowCreateModal(false);
+      
+      // Show achievement notifications
+      if (response.data.newBadges && response.data.newBadges.length > 0) {
+        console.log('Adding badges to queue:', response.data.newBadges);
+        setAchievementQueue(prev => [...prev, ...response.data.newBadges]);
+      }
     } catch (error) {
       console.error('Error creating habit:', error);
     }
   };
 
   const handleDeleteHabit = async (habitId) => {
-    if (!window.confirm('Are you sure you want to delete this habit?')) {
-      return;
-    }
-    
+    setConfirmDialog({ isOpen: true, habitId });
+  };
+
+  const confirmDeleteHabit = async () => {
     try {
-      await habitsAPI.delete(habitId);
+      await habitsAPI.delete(confirmDialog.habitId);
+      setConfirmDialog({ isOpen: false, habitId: null });
       fetchDashboardData();
     } catch (error) {
       console.error('Error deleting habit:', error);
+      setConfirmDialog({ isOpen: false, habitId: null });
     }
   };
 
@@ -165,7 +198,7 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="empty-state card">
-                <div className="empty-state-icon">🎯</div>
+                <div className="empty-state-icon"><FaBullseye /></div>
                 <div className="empty-state-text">No habits yet</div>
                 <p>Create your first habit to get started!</p>
                 <button 
@@ -182,7 +215,7 @@ const Dashboard = () => {
           <div className="squads-section">
             <div className="section-header">
               <h2>My Squads</h2>
-              <Link to="/squads/find" className="btn btn-secondary">
+              <Link to="/squads/find" className="btn btn-primary">
                 <FaUsers /> Find Squads
               </Link>
             </div>
@@ -221,7 +254,7 @@ const Dashboard = () => {
                 <div className="empty-state-icon">🤝</div>
                 <div className="empty-state-text">No squads yet</div>
                 <p>Join a squad to connect with others!</p>
-                <Link to="/squads/find" className="btn btn-secondary">
+                <Link to="/squads/find" className="btn btn-primary">
                   <FaUsers /> Browse Squads
                 </Link>
               </div>
@@ -236,6 +269,24 @@ const Dashboard = () => {
           onCreate={handleCreateHabit}
         />
       )}
+
+      {currentAchievement && (
+        <AchievementNotification
+          badge={currentAchievement}
+          onClose={() => setCurrentAchievement(null)}
+        />
+      )}
+
+      <ConfirmDialog
+        isOpen={confirmDialog.isOpen}
+        onClose={() => setConfirmDialog({ isOpen: false, habitId: null })}
+        onConfirm={confirmDeleteHabit}
+        title="Delete Habit"
+        message="Are you sure you want to delete this habit? This action cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+        isDangerous={true}
+      />
     </div>
   );
 };

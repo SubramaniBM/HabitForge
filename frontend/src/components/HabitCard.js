@@ -83,7 +83,7 @@ const HabitCard = ({ habit, onComplete, onDelete }) => {
             />
           </div>
           <span className="progress-text">
-            {habit.currentStreak >= 30 ? '30+ days! 🎉' : `${30 - habit.currentStreak} days to milestone`}
+            {habit.currentStreak >= 30 ? '30+ days!' : `${30 - habit.currentStreak} days to milestone`}
           </span>
         </div>
       )}

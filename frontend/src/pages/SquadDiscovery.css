@@ -44,7 +44,7 @@
   width: 100%;
   padding: 14px 16px 14px 48px;
   border: 2px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 16px;
   transition: var(--transition);
   background-color: var(--input-bg);
@@ -66,7 +66,7 @@
 .category-filter {
   padding: 10px 20px;
   border: 2px solid var(--border-color);
-  border-radius: 20px;
+  border-radius: 0;
   background-color: var(--card-bg);
   color: var(--text-color);
   font-weight: 500;
@@ -113,7 +113,7 @@
   width: 60px;
   height: 60px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 16px;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +162,7 @@
   background-color: #f5f7fa;
   color: var(--dark-color);
   padding: 4px 12px;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 12px;
   font-weight: 600;
   text-transform: capitalize;

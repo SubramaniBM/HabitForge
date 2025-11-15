@@ -124,7 +124,17 @@ router.get('/verify', require('../middleware/auth'), async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
     
-    res.json({ user });
+    res.json({ 
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        level: user.level,
+        points: user.points,
+        badges: user.badges,
+        squads: user.squads
+      }
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });

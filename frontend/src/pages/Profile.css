@@ -1,5 +1,5 @@
 .profile-page {
-  background-color: #f5f7fa;
+  background-color: var(--bg-color);
 }
 
 .profile-header {
@@ -11,17 +11,18 @@
 }
 
 .profile-avatar-large {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #FF6B35, #F7931E);
+  background: var(--primary-color);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 600;
   flex-shrink: 0;
+  border: 3px solid var(--border-color);
 }
 
 .profile-info {
@@ -29,15 +30,16 @@
 }
 
 .profile-username {
-  font-size: 36px;
-  font-weight: 700;
-  color: var(--dark-color);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text-color);
   margin-bottom: 12px;
+  letter-spacing: -0.02em;
 }
 
 .profile-bio {
-  font-size: 16px;
-  color: #7f8c8d;
+  font-size: 15px;
+  color: var(--text-secondary);
   margin-bottom: 24px;
   line-height: 1.6;
 }
@@ -56,32 +58,22 @@
 }
 
 .profile-stat-icon {
-  font-size: 32px;
-}
-
-.profile-stat-icon.level {
-  color: #667eea;
-}
-
-.profile-stat-icon.points {
-  color: #F39C12;
-}
-
-.profile-stat-icon.squads {
-  color: #50C878;
+  font-size: 28px;
+  color: var(--text-secondary);
 }
 
 .profile-stat-label {
-  font-size: 13px;
-  color: #7f8c8d;
+  font-size: 12px;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .profile-stat-value {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--dark-color);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-color);
+  letter-spacing: -0.01em;
 }
 
 .profile-content {
@@ -94,10 +86,11 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
-  color: var(--dark-color);
+  color: var(--text-color);
   margin-bottom: 20px;
+  letter-spacing: -0.01em;
 }
 
 .badges-grid {
@@ -197,4 +190,41 @@
   .profile-squads-list {
     grid-template-columns: 1fr;
   }
+}
+
+.danger-zone {
+  margin-top: 32px;
+  padding: 32px;
+  border: 2px solid #f44336;
+  background: #ffebee;
+}
+
+.danger-zone h3 {
+  color: #c62828;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.danger-zone p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.btn-danger-solid {
+  background: #f44336;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-danger-solid:hover {
+  background: #d32f2f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
 }

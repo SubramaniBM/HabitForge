@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { squadsAPI, activitiesAPI } from '../services/api';
-import { FaTrophy, FaFire, FaHeart, FaUserPlus } from 'react-icons/fa';
+import { FaTrophy, FaFire, FaHeart, FaUserPlus, FaSignOutAlt } from 'react-icons/fa';
 import InviteModal from '../components/InviteModal';
+import ConfirmDialog from '../components/ConfirmDialog';
 import './SquadDashboard.css';
 
 const SquadDashboard = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [squad, setSquad] = useState(null);
   const [activities, setActivities] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showInviteModal, setShowInviteModal] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false });
 
   useEffect(() => {
     fetchSquadData();
@@ -45,6 +48,22 @@ const SquadDashboard = () => {
     }
   };
 
+  const handleLeaveSquad = async () => {
+    setConfirmDialog({ isOpen: true });
+  };
+
+  const confirmLeaveSquad = async () => {
+    try {
+      await squadsAPI.leave(id);
+      setConfirmDialog({ isOpen: false });
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Error leaving squad:', error);
+      setConfirmDialog({ isOpen: false });
+      alert(error.response?.data?.message || 'Failed to leave squad');
+    }
+  };
+
   if (loading) {
     return <div className="loading">Loading squad...</div>;
   }
@@ -69,12 +88,20 @@ const SquadDashboard = () => {
               <span>{squad.category}</span>
             </div>
           </div>
-          <button 
-            className="btn btn-primary"
-            onClick={() => setShowInviteModal(true)}
-          >
-            <FaUserPlus /> Invite Members
-          </button>
+          <div className="squad-header-actions">
+            <button 
+              className="btn btn-primary"
+              onClick={() => setShowInviteModal(true)}
+            >
+              <FaUserPlus /> Invite Members
+            </button>
+            <button 
+              className="btn btn-outline btn-danger"
+              onClick={handleLeaveSquad}
+            >
+              <FaSignOutAlt /> Leave Squad
+            </button>
+          </div>
         </div>
 
         <div className="squad-goal-card card">
@@ -93,7 +120,7 @@ const SquadDashboard = () => {
             </div>
             <p className="goal-message">
               {goalProgress >= 100 
-                ? '🎉 Goal achieved! Amazing teamwork!' 
+                ? 'Goal achieved! Amazing teamwork!' 
                 : `${Math.round(100 - goalProgress)}% to go - keep it up!`}
             </p>
           </div>
@@ -172,6 +199,17 @@ const SquadDashboard = () => {
           onClose={() => setShowInviteModal(false)}
         />
       )}
+
+      <ConfirmDialog
+        isOpen={confirmDialog.isOpen}
+        onClose={() => setConfirmDialog({ isOpen: false })}
+        onConfirm={confirmLeaveSquad}
+        title="Leave Squad"
+        message="Are you sure you want to leave this squad? You'll lose access to the squad's activities and leaderboard."
+        confirmText="Leave Squad"
+        cancelText="Stay"
+        isDangerous={true}
+      />
     </div>
   );
 };

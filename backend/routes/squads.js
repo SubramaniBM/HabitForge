@@ -164,13 +164,20 @@ router.post('/:id/leave', auth, async (req, res) => {
       return res.status(400).json({ message: 'Transfer ownership before leaving' });
     }
     
-    squad.removeMember(req.userId);
-    await squad.save();
-    
     // Remove squad from user
     const user = await User.findById(req.userId);
     user.squads = user.squads.filter(s => s.toString() !== squad._id.toString());
     await user.save();
+    
+    // If this is the last member, delete the squad
+    if (squad.members.length === 1) {
+      await Squad.findByIdAndDelete(req.params.id);
+      return res.json({ message: 'Left squad successfully. Squad has been deleted as you were the last member.' });
+    }
+    
+    // Otherwise just remove the member
+    squad.removeMember(req.userId);
+    await squad.save();
     
     res.json({ message: 'Left squad successfully' });
   } catch (error) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFire, FaUsers, FaHeart, FaLightbulb } from 'react-icons/fa';
+import { FaFire, FaUsers, FaHeart, FaLightbulb, FaBullseye, FaHandshake, FaGamepad, FaAward } from 'react-icons/fa';
 import './About.css';
 
 const About = () => {
@@ -94,7 +94,7 @@ const About = () => {
             <h2 className="text-center mb-4">Our Core Values</h2>
             <div className="values-grid">
               <div className="value-card">
-                <h3>🎯 Goal-Oriented</h3>
+                <h3><FaBullseye /> Goal-Oriented</h3>
                 <p>Every feature is designed to help you achieve your goals</p>
               </div>
               <div className="value-card">

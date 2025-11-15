@@ -1,5 +1,5 @@
 .about-page {
-  background-color: #f5f7fa;
+  background-color: var(--bg-color);
 }
 
 .about-content {
@@ -14,29 +14,31 @@
 }
 
 .section-icon {
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 16px;
+  width: 64px;
+  height: 64px;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  color: white;
+  font-size: 28px;
+  color: var(--text-color);
   margin-bottom: 24px;
 }
 
 .about-section h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--dark-color);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-color);
   margin-bottom: 20px;
+  letter-spacing: -0.01em;
 }
 
 .about-section p {
-  font-size: 16px;
-  line-height: 1.8;
-  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
   margin-bottom: 16px;
 }
 
@@ -101,11 +103,13 @@
   box-shadow: var(--box-shadow);
   text-align: center;
   transition: var(--transition);
+  border: 1px solid var(--primary-color);
 }
 
 .value-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--secondary-color);
 }
 
 .value-card h3 {

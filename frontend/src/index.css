@@ -5,14 +5,15 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Clash Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 450;
 }
 
 code {
@@ -21,36 +22,27 @@ code {
 }
 
 :root {
-  --primary-color: #4A90E2;
-  --secondary-color: #50C878;
-  --danger-color: #E74C3C;
-  --warning-color: #F39C12;
-  --dark-color: #2C3E50;
-  --light-color: #ECF0F1;
-  --border-radius: 12px;
-  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
+  --primary-color: #0d0f0d;
+  --secondary-color: #1a1d1a;
+  --accent-color: #666666;
+  --danger-color: #ef4444;
+  --success-color: #22c55e;
+  --warning-color: #f59e0b;
+  --dark-color: #080a08;
+  --light-color: #f5f3e8;
+  --border-radius: 0px;
+  --box-shadow: none;
+  --box-shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --transition: all 0.2s ease;
   
-  /* Light theme colors */
-  --bg-color: #f5f7fa;
+  --bg-color: #f5f3e8;
   --card-bg: #ffffff;
-  --text-color: #333333;
-  --text-secondary: #7f8c8d;
-  --border-color: #e0e0e0;
-  --navbar-bg: #ffffff;
+  --text-color: #0d0f0d;
+  --text-secondary: #666666;
+  --border-color: #d4d2c4;
+  --navbar-bg: #0d0f0d;
   --input-bg: #ffffff;
-}
-
-/* Dark theme colors - Dark Purple */
-body.dark-theme {
-  --bg-color: #0d0518;
-  --card-bg: #1a0f2e;
-  --text-color: #e8e4f3;
-  --text-secondary: #a199b8;
-  --border-color: #3d2963;
-  --navbar-bg: #0a0015;
-  --input-bg: #1f1035;
-  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  --hover-bg: #ebebde;
 }
 
 a {
@@ -81,57 +73,69 @@ ul {
 }
 
 .btn {
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 0;
+  font-size: 15px;
+  font-weight: 500;
   transition: var(--transition);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   text-align: center;
+  border: 1px solid transparent;
+  letter-spacing: -0.005em;
 }
 
 .btn-primary {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--bg-color);
+  border: 1px solid var(--primary-color);
 }
 
 .btn-primary:hover {
-  background-color: #3a7bc8;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(74, 144, 226, 0.3);
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: none;
+  opacity: 1;
 }
 
 .btn-secondary {
-  background-color: var(--secondary-color);
-  color: white;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-  background-color: #45b369;
-  transform: translateY(-2px);
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  border-color: var(--text-color);
 }
 
 .btn-outline {
   background-color: transparent;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 1px solid currentColor;
+  color: inherit;
 }
 
 .btn-outline:hover {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: currentColor;
+  color: var(--primary-color);
+  border-color: currentColor;
 }
 
 .card {
   background: var(--card-bg);
-  border-radius: var(--border-radius);
-  padding: 24px;
-  box-shadow: var(--box-shadow);
+  border-radius: 0;
+  padding: 32px;
+  border: 1px solid var(--border-color);
   transition: var(--transition);
 }
 
 .card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--text-color);
+  box-shadow: none;
 }
 
 .page-header {
@@ -139,10 +143,12 @@ ul {
 }
 
 .page-title {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 48px;
+  font-weight: 600;
   color: var(--text-color);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
 }
 
 .page-subtitle {

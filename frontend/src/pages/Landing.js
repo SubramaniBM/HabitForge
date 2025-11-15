@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFire, FaUsers, FaTrophy, FaMedal, FaChartLine, FaArrowRight } from 'react-icons/fa';
+import { FaFire, FaUsers, FaTrophy, FaMedal, FaChartLine, FaArrowRight, FaStar, FaBolt, FaHeart, FaRocket, FaCrown } from 'react-icons/fa';
 import './Landing.css';
 
 const Landing = () => {
@@ -27,16 +27,15 @@ const Landing = () => {
                 </Link>
               </div>
             </div>
-            <div className="hero-image">
-              <div className="floating-card card-1">
-                <FaFire className="icon" /> 7-Day Streak!
-              </div>
-              <div className="floating-card card-2">
-                <FaTrophy className="icon" /> Level 12
-              </div>
-              <div className="floating-card card-3">
-                <FaUsers className="icon" /> 5 Squads
-              </div>
+            <div className="hero-badges">
+              <FaTrophy className="floating-badge badge-1" />
+              <FaMedal className="floating-badge badge-2" />
+              <FaFire className="floating-badge badge-3" />
+              <FaStar className="floating-badge badge-4" />
+              <FaBolt className="floating-badge badge-5" />
+              <FaHeart className="floating-badge badge-6" />
+              <FaRocket className="floating-badge badge-7" />
+              <FaCrown className="floating-badge badge-8" />
             </div>
           </div>
         </div>

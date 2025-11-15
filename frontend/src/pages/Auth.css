@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-color);
 }
 
 .auth-container {
@@ -13,8 +13,10 @@
 }
 
 .auth-card {
-  background: white;
+  background: var(--card-bg);
   padding: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
   animation: slideUp 0.5s ease;
 }
 
@@ -35,21 +37,22 @@
 }
 
 .auth-icon {
-  font-size: 48px;
-  color: #FF6B35;
+  font-size: 40px;
+  color: var(--primary-color);
   margin-bottom: 16px;
 }
 
 .auth-header h1 {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--dark-color);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-color);
   margin-bottom: 8px;
+  letter-spacing: -0.02em;
 }
 
 .auth-header p {
-  color: #7f8c8d;
-  font-size: 16px;
+  color: var(--text-secondary);
+  font-size: 14px;
 }
 
 .auth-form {
@@ -63,25 +66,27 @@
 .form-group label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  color: var(--dark-color);
+  gap: 6px;
+  font-weight: 500;
+  color: var(--text-color);
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 14px 16px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  font-size: 14px;
   transition: var(--transition);
+  background: var(--input-bg);
 }
 
 .form-group input:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.05);
 }
 
 .btn-block {

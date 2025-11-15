@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FaUser, FaEnvelope, FaLock, FaFire } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import { GiAnvil } from 'react-icons/gi';
 import './Auth.css';
 
 const Register = () => {
@@ -66,7 +67,7 @@ const Register = () => {
       <div className="auth-container">
         <div className="auth-card card">
           <div className="auth-header">
-            <FaFire className="auth-icon" />
+            <GiAnvil className="auth-icon" />
             <h1>Join HabitForge</h1>
             <p>Start building better habits today!</p>
           </div>

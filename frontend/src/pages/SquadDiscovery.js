@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { squadsAPI } from '../services/api';
-import { FaSearch, FaUsers, FaPlus, FaLock, FaGlobe } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
+import { FaSearch, FaUsers, FaPlus, FaLock, FaGlobe, FaCheck } from 'react-icons/fa';
 import CreateSquadModal from '../components/CreateSquadModal';
 import './SquadDiscovery.css';
 
@@ -12,8 +13,15 @@ const SquadDiscovery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const { user } = useAuth();
 
   const categories = ['all', 'fitness', 'productivity', 'learning', 'wellness', 'mixed'];
+
+  const isUserMember = (squad) => {
+    return squad.members.some(member => 
+      member.user === user?.id || member.user?._id === user?.id
+    );
+  };
 
   useEffect(() => {
     fetchPublicSquads();
@@ -148,16 +156,22 @@ const SquadDiscovery = () => {
                 </div>
 
                 <div className="squad-card-actions">
-                  <Link to={`/squads/${squad._id}`} className="btn btn-outline">
+                  <Link to={`/squads/${squad._id}`} className="btn btn-primary">
                     View Details
                   </Link>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleJoinSquad(squad._id)}
-                    disabled={squad.members.length >= squad.maxMembers}
-                  >
-                    {squad.members.length >= squad.maxMembers ? 'Full' : 'Join Squad'}
-                  </button>
+                  {isUserMember(squad) ? (
+                    <div className="btn btn-primary" style={{ cursor: 'default', opacity: 0.7 }}>
+                      <FaCheck /> Already Joined
+                    </div>
+                  ) : (
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleJoinSquad(squad._id)}
+                      disabled={squad.members.length >= squad.maxMembers}
+                    >
+                      {squad.members.length >= squad.maxMembers ? 'Full' : 'Join Squad'}
+                    </button>
+                  )}
                 </div>
               </div>
             ))}

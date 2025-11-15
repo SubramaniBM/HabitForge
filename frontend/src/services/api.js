@@ -57,7 +57,8 @@ export const usersAPI = {
   getProfile: (userId) => api.get(`/users/profile/${userId}`),
   getMe: () => api.get('/users/me'),
   updateProfile: (userData) => api.put('/users/profile', userData),
-  search: (query) => api.get('/users/search', { params: { q: query } })
+  search: (query) => api.get('/users/search', { params: { q: query } }),
+  deleteAccount: () => api.delete('/users/account')
 };
 
 // Activities API

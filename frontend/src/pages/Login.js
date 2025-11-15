@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FaEnvelope, FaLock, FaFire } from 'react-icons/fa';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { GiAnvil } from 'react-icons/gi';
 import './Auth.css';
 
 const Login = () => {
@@ -9,6 +10,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -43,7 +45,7 @@ const Login = () => {
       <div className="auth-container">
         <div className="auth-card card">
           <div className="auth-header">
-            <FaFire className="auth-icon" />
+            <GiAnvil className="auth-icon" />
             <h1>Welcome Back!</h1>
             <p>Log in to continue your habit journey</p>
           </div>
@@ -79,6 +81,17 @@ const Login = () => {
                 placeholder="Enter your password"
                 required
               />
+            </div>
+
+            <div className="form-group-checkbox">
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <span>Remember me</span>
+              </label>
             </div>
 
             <button 

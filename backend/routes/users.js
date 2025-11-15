@@ -101,4 +101,42 @@ router.get('/search', auth, async (req, res) => {
   }
 });
 
+// @route   DELETE /api/users/account
+// @desc    Delete user account and all associated data
+// @access  Private
+router.delete('/account', auth, async (req, res) => {
+  try {
+    const Habit = require('../models/Habit');
+    const Squad = require('../models/Squad');
+    const Activity = require('../models/Activity');
+
+    // Delete user's habits
+    await Habit.deleteMany({ user: req.userId });
+
+    // Remove user from all squads and delete empty squads
+    const squads = await Squad.find({ 'members.user': req.userId });
+    for (const squad of squads) {
+      squad.removeMember(req.userId);
+      
+      // If squad becomes empty, delete it
+      if (squad.members.length === 0) {
+        await Squad.findByIdAndDelete(squad._id);
+      } else {
+        await squad.save();
+      }
+    }
+
+    // Delete user's activities
+    await Activity.deleteMany({ user: req.userId });
+
+    // Delete user account
+    await User.findByIdAndDelete(req.userId);
+
+    res.json({ message: 'Account deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
