@@ -53,6 +53,16 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
+      <div className="hero-badges">
+        <FaTrophy className="floating-badge badge-1" />
+        <FaMedal className="floating-badge badge-2" />
+        <FaFire className="floating-badge badge-3" />
+        <FaStar className="floating-badge badge-4" />
+        <FaBolt className="floating-badge badge-5" />
+        <FaHeart className="floating-badge badge-6" />
+        <FaRocket className="floating-badge badge-7" />
+        <FaCrown className="floating-badge badge-8" />
+      </div>
       {/* Hero Section */}
       <section className="hero">
         <div className="container">
@@ -74,16 +84,7 @@ const Landing = () => {
                 </Link>
               </div>
             </div>
-            <div className="hero-badges">
-              <FaTrophy className="floating-badge badge-1" />
-              <FaMedal className="floating-badge badge-2" />
-              <FaFire className="floating-badge badge-3" />
-              <FaStar className="floating-badge badge-4" />
-              <FaBolt className="floating-badge badge-5" />
-              <FaHeart className="floating-badge badge-6" />
-              <FaRocket className="floating-badge badge-7" />
-              <FaCrown className="floating-badge badge-8" />
-            </div>
+            
           </div>
         </div>
       </section>

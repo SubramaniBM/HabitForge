@@ -23,8 +23,14 @@
   justify-content: center;
   text-align: center;
   position: relative;
-  z-index: 1;
+  /* Keep hero text above floating sprites in dark section */
+  z-index: 2;
   min-height: 500px;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-title {
@@ -79,7 +85,7 @@
 }
 
 .hero-badges {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
@@ -93,6 +99,9 @@
   color: rgba(100, 100, 100, 0.3);
   opacity: 1;
   font-size: 48px;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* From left to right */
@@ -100,7 +109,7 @@
   top: 15%;
   left: -100px;
   animation: leftToRight 15s linear infinite;
-  animation-delay: 0s;
+  animation-delay: -7s;
   font-size: 56px;
 }
 
@@ -109,7 +118,7 @@
   top: 35%;
   right: -100px;
   animation: rightToLeft 18s linear infinite;
-  animation-delay: 2s;
+  animation-delay: -10s;
   font-size: 42px;
 }
 
@@ -118,7 +127,7 @@
   top: -100px;
   left: 20%;
   animation: topToBottom 20s linear infinite;
-  animation-delay: 4s;
+  animation-delay: -12s;
   font-size: 52px;
 }
 
@@ -127,7 +136,7 @@
   bottom: -100px;
   left: 70%;
   animation: bottomToTop 16s linear infinite;
-  animation-delay: 6s;
+  animation-delay: -8s;
   font-size: 38px;
 }
 
@@ -136,7 +145,7 @@
   top: 60%;
   left: -100px;
   animation: leftToRight 17s linear infinite;
-  animation-delay: 8s;
+  animation-delay: -9s;
   font-size: 44px;
 }
 
@@ -145,7 +154,7 @@
   top: 80%;
   right: -100px;
   animation: rightToLeft 19s linear infinite;
-  animation-delay: 3s;
+  animation-delay: -11s;
   font-size: 50px;
 }
 
@@ -154,7 +163,7 @@
   top: -100px;
   left: 60%;
   animation: topToBottom 22s linear infinite;
-  animation-delay: 1s;
+  animation-delay: -13s;
   font-size: 46px;
 }
 
@@ -163,7 +172,7 @@
   bottom: -100px;
   left: 30%;
   animation: bottomToTop 14s linear infinite;
-  animation-delay: 5s;
+  animation-delay: -7s;
   font-size: 54px;
 }
 
@@ -448,6 +457,9 @@
   text-align: center;
   max-width: 700px;
   margin: 0 auto;
+  /* Ensure CTA text is above sprites when present */
+  position: relative;
+  z-index: 2;
 }
 
 .cta-content h2 {
